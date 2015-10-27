@@ -3,7 +3,6 @@ package trainee.task_1;
 import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.widget.TextView;
 
 public class SplashActivity extends Activity {
 
@@ -19,9 +18,9 @@ public class SplashActivity extends Activity {
                     while(logoTimer < 2000)
                     {
                         sleep(100);
-                        logoTimer = logoTimer +100;
+                        logoTimer = logoTimer + 100;
                     };
-                    startActivity(new Intent("com.tutorial.CLEARSCREEN"));
+                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();
