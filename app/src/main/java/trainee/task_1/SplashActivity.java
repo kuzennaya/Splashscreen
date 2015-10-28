@@ -3,7 +3,7 @@ package trainee.task_1;
 import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Handler;
 
 public class SplashActivity extends Activity {
     private boolean isInitial = false;
@@ -16,34 +16,19 @@ public class SplashActivity extends Activity {
         }
 
         if (!isInitial) {
-            Thread logoTimer = new Thread() {
+            new Handler().postDelayed(new Runnable() {
+                @Override
                 public void run() {
-                    try {
-                        sleep(2000);
-                        if (!isInitial) {
-                            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                            isInitial = true;
-                        }
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                        isInitial = true;
-                    } finally {
-                        finish();
-                    }
+                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                    SplashActivity.this.finish();
                 }
-            };
-            logoTimer.start();
+            }, 2000);
+            isInitial = true;
         }
     }
     @Override
     public void onBackPressed() {
         isInitial = true;
-    }
-    @Override
-    public void onStop(){
-        super.onStop();
-        //isInitial = true;
     }
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
