@@ -3,34 +3,29 @@ package trainee.task_1;
 import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.widget.TextView;
+import android.os.Handler;
 
 public class SplashActivity extends Activity {
+    private Handler handler;
+    private Runnable r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        Thread logoTimer = new Thread() {
+        handler = new Handler();
+        r = new Runnable() {
+            @Override
             public void run() {
-                try {
-                    int logoTimer = 0;
-                    while(logoTimer < 2000)
-                    {
-                        sleep(100);
-                        logoTimer = logoTimer +100;
-                    };
-                    startActivity(new Intent("com.tutorial.CLEARSCREEN"));
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                finally {
-                    finish();
-                }
+                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                SplashActivity.this.finish();
             }
         };
-        logoTimer.start();
+        handler.postDelayed(r, 2000);
+    }
+    @Override
+    public void onStop(){
+        super.onStop();
+        handler.removeCallbacks(r);
     }
 }
