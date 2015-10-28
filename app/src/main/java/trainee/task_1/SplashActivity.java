@@ -27,6 +27,7 @@ public class SplashActivity extends Activity {
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                        isInitial = true;
                     } finally {
                         finish();
                     }
@@ -39,15 +40,10 @@ public class SplashActivity extends Activity {
     public void onBackPressed() {
         isInitial = true;
     }
-   /* @Override
-    public void onPause(){
-        super.onPause();
-        isInitial = true;
-    }*/
     @Override
     public void onStop(){
         super.onStop();
-       // isInitial = true;
+        //isInitial = true;
     }
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
